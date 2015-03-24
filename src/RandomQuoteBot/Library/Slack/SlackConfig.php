@@ -89,7 +89,7 @@ class SlackConfig
     protected static function parseYml($fileName)
     {
         if (!file_exists($fileName)) {
-            throw new FileNotFoundException($fileName);
+            throw new \Exception($fileName);
         }
 
         return Yaml::parse($fileName);
