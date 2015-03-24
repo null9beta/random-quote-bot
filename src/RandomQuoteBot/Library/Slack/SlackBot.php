@@ -29,18 +29,32 @@ class SlackBot
         $this->commander = new Commander($slackConfig->getApiKey(), $interactor);
     }
 
+    /**
+     * @param $userId
+     * @return mixed
+     */
     public function getDirectChannel($userId)
     {
         $response = $this->commander->execute('im.open', ['user' => $userId]);
         return $response->getBody()['channel']['id'];
     }
 
+    /**
+     * @return string
+     */
     public function listUsers()
     {
         $response = $this->commander->execute('users.list', []);
         return $response->getBody();
     }
 
+    /**
+     * @param $channel
+     * @param $message
+     * @param string $botName
+     * @param string $botImage
+     * @return \Frlnc\Slack\Contracts\Http\Response
+     */
     public function postMessage($channel, $message, $botName = 'bot', $botImage = '')
     {
         return $this->commander->execute('chat.postMessage',
@@ -53,6 +67,12 @@ class SlackBot
         );
     }
 
+    /**
+     * @param $userId
+     * @param $message
+     * @param string $botName
+     * @param string $botImage
+     */
     public function postDirectMessage($userId, $message, $botName = 'bot', $botImage = '')
     {
         $directChannelId = $this->getDirectChannel($userId);

@@ -1,6 +1,8 @@
 <?php
 namespace RandomQuoteBot\Library\Slack\Console\Command;
 
+use Frlnc\Slack\Http\SlackResponse;
+use Frlnc\Slack\Http\SlackResponseFactory;
 use RandomQuoteBot\Library\Slack\SlackBot;
 use RandomQuoteBot\Library\Slack\SlackConfig;
 use RandomQuoteBot\RandomQuote\AxelStollRandomQuote;
@@ -55,8 +57,28 @@ class RandomQuoteToSlackCommand extends Command
 
         $fileName = APP_ROOT . 'config/' . $config . '.yml';;
         $quote = RandomQuoteFactory::createRandomQuoteByName($quoteType, new SlackConfig($fileName));
-        $quote->sendQuote('#'. $channel);
 
-        echo "quote send" . PHP_EOL;
+        $response = $quote->sendQuote('#'. $channel);
+        if ($this->isSuccess($response)) {
+            echo "quote send" . PHP_EOL;
+        } else {
+            echo "FAILED sending quote" . PHP_EOL . PHP_EOL;
+            var_dump($response);
+            echo PHP_EOL;
+        }
+    }
+
+    /**
+     * @param \Frlnc\Slack\Contracts\Http\Response $response
+     * @return bool
+     */
+    protected function isSuccess(\Frlnc\Slack\Contracts\Http\Response $response)
+    {
+        $body = $response->getBody();
+        if (isset($body['ok']) && $body['ok'] == true) {
+            return true;
+        }
+
+        return false;
     }
 }

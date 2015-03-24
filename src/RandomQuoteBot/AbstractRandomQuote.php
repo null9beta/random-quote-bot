@@ -3,7 +3,7 @@ namespace RandomQuoteBot;
 
 use RandomQuoteBot\Library\Slack\SlackBot;
 
-abstract class AbstractRandomQuote
+abstract class AbstractRandomQuote implements RandomQuoteInterface
 {
     /**
      * @var SlackBot
@@ -24,10 +24,11 @@ abstract class AbstractRandomQuote
     abstract protected function getRandomQuote();
 
     /**
-     * @param $channel
+     * @param string $channel
+     * @return \Frlnc\Slack\Contracts\Http\Response
      */
     public function sendQuote($channel)
     {
-        $this->slackBot->postMessage($channel, $this->getRandomQuote());
+        return $this->slackBot->postMessage($channel, $this->getRandomQuote());
     }
 }
