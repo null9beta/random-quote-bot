@@ -1,0 +1,14 @@
+#!/usr/bin/env php
+<?php
+set_time_limit(0);
+
+require_once __DIR__.'/../vendor/autoload.php';
+
+define('APP_ROOT', realpath(__DIR__ . '/../') . '/');
+
+use RandomQuoteBot\Library\Slack\Console\Command\RandomQuoteToSlackCommand;
+use Symfony\Component\Console\Application;
+
+$application = new Application();
+$application->add(new RandomQuoteToSlackCommand());
+$application->run();

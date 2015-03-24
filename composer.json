@@ -1,0 +1,19 @@
+{
+  "name": "loopline-systems/random-quote-bot",
+  "description": "Random quotes posted to slack channel",
+  "authors": [
+    {
+      "name": "null9beta",
+      "email": "marco.rossdeutscher@gmail.com"
+    }
+  ],
+  "autoload": {
+    "psr-0": { "": "src/" }
+  },
+  "require": {
+    "frlnc/php-slack": "dev-master",
+    "symfony/console": "v2.6.5",
+    "symfony/yaml": "2.6.5",
+    "zendframework/zend-filter": "2.3.7"
+  }
+}

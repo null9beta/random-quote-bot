@@ -1,0 +1,8 @@
+slack:
+  api_key: '<yourApiKey>'
+  channels:
+    - '<channelName>'
+  users:
+    - name: '<Name>'
+      id: '<Id>'
+      image: '<imagePath>' 
