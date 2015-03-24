@@ -8,7 +8,7 @@ abstract class AbstractRandomQuote implements RandomQuoteInterface
     /**
      * @var SlackBot
      */
-    private $slackBot;
+    protected $slackBot;
 
     /**
      * @param SlackBot $slackBot

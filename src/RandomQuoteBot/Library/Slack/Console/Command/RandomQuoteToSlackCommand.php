@@ -1,11 +1,7 @@
 <?php
 namespace RandomQuoteBot\Library\Slack\Console\Command;
 
-use Frlnc\Slack\Http\SlackResponse;
-use Frlnc\Slack\Http\SlackResponseFactory;
-use RandomQuoteBot\Library\Slack\SlackBot;
 use RandomQuoteBot\Library\Slack\SlackConfig;
-use RandomQuoteBot\RandomQuote\AxelStollRandomQuote;
 use RandomQuoteBot\RandomQuoteFactory;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
