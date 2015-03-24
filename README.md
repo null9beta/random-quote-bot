@@ -6,9 +6,15 @@ Feel free to fork and add own RandomQuote classes.
 
 ## Adding new Quotes
  - Create a new Concret Quote here -> RandomQuoteBot\RandomQuote
- - Create a Command that will use the new Quote
+
+
 
 ## Usage
 ```
-bin/console quote:send-random-quote-to-slack <configName> <channelName>
+bin/console quote:send-random-quote-to-slack <configName> <randomQuoteClassName with dashes> <channelName>
 ```
+
+## Example
+- create a class `RandomQuoteBot\RandomQuote\MyQuoteRandomQuote` that extends the AbstractRandomQuote
+- call it like this `bin/console quote:send-random-quote-to-slack main my-quote it-channel`
+
