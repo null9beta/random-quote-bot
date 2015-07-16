@@ -29,14 +29,14 @@ class RandomQuoteToSlackCommand extends Command
                 'what config to load, requires a <config>.yml in the config/ folder'
             )
             ->addArgument(
-                self::ARGUMENT_QUOTE_TYPE,
-                InputArgument::REQUIRED,
-                'what quote type to load'
-            )
-            ->addArgument(
                 self::ARGUMENT_CHANNEL,
                 InputArgument::REQUIRED,
                 'what channel to quote to send to'
+            )
+            ->addArgument(
+                self::ARGUMENT_QUOTE_TYPE,
+                InputArgument::OPTIONAL,
+                'what quote type to load, if none is given, a random quote is selected'
             );
     }
 
@@ -48,11 +48,16 @@ class RandomQuoteToSlackCommand extends Command
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $config = $input->getArgument(self::ARGUMENT_CONFIG);
-        $quoteType = $input->getArgument(self::ARGUMENT_QUOTE_TYPE);
+        $quoteType = $input->getArgument(self::ARGUMENT_QUOTE_TYPE, null);
         $channel = $input->getArgument(self::ARGUMENT_CHANNEL);
 
         $fileName = APP_ROOT . 'config/' . $config . '.yml';;
-        $quote = RandomQuoteFactory::createRandomQuoteByName($quoteType, new SlackConfig($fileName));
+
+        if ($quoteType) {
+            $quote = RandomQuoteFactory::createRandomQuoteByName($quoteType, new SlackConfig($fileName));
+        } else {
+            $quote = RandomQuoteFactory::createRandomQuote(new SlackConfig($fileName));
+        }
 
         $response = $quote->sendQuote('#'. $channel);
         if ($this->isSuccess($response)) {
