@@ -14,6 +14,7 @@ class SlackConfig
     const KEY_USER_ID = 'id';
     const KEY_USER_NAME = 'name';
     const KEY_USER_IMAGE = 'image';
+    const KEY_PROVIDERS = 'providers';
 
     /**
      * @var
@@ -80,6 +81,15 @@ class SlackConfig
     public function getChannel()
     {
         return isset($this->options[self::KEY_CHANNELS]) ? $this->options[self::KEY_CHANNELS] : [];
+    }
+
+    public function getQuoteProviders()
+    {
+        if (!isset($this->options[self::KEY_PROVIDERS])) {
+            return [];
+        }
+
+        return $this->options[self::KEY_PROVIDERS];
     }
 
     /**

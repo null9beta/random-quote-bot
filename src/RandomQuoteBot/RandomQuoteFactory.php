@@ -30,6 +30,25 @@ class RandomQuoteFactory
 
     /**
      * @param SlackConfig $slackConfig
+     *
+     * @return RandomQuoteInterface
+     * @throws \Exception
+     */
+    public static function createRandomQuote(SlackConfig $slackConfig)
+    {
+        $providers = $slackConfig->getQuoteProviders();
+
+        if (empty($providers)) {
+            throw new \Exception('No Providers are given');
+        }
+
+        $index = mt_rand(0, count($providers) - 1);
+
+        return self::createRandomQuoteByName($providers[$index], $slackConfig);
+    }
+
+    /**
+     * @param SlackConfig $slackConfig
      * @return SlackBot
      */
     private static function createSlackBot(SlackConfig $slackConfig)

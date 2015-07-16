@@ -5,4 +5,8 @@ slack:
   users:
     - name: '<Name>'
       id: '<Id>'
-      image: '<imagePath>' 
+      image: '<imagePath>'
+  providers:
+    - axel-stoll
+    - german-bash
+
