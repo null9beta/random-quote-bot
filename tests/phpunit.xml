@@ -1,0 +1,15 @@
+<phpunit backupGlobals="true" bootstrap="./bootstrap.php">
+    <filter>
+        <whitelist>
+            <directory>/src</directory>
+        </whitelist>
+    </filter>
+    <testsuites>
+        <testsuite name="Random Quote Bot Tests">
+            <directory>./</directory>
+        </testsuite>
+    </testsuites>
+    <logging>
+        <log type="coverage-clover" target="build/logs/clover.xml"/>
+    </logging>
+</phpunit>
