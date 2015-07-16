@@ -23,14 +23,9 @@ class IbashRandomQuote extends AbstractRandomQuote
         $xpath = new \DOMXPath($document);
 
         $quotes = $xpath->query('//td[@class="quote"]');
+        $randQuote = $this->getRandomEntry($quotes);
 
-        for ($i = 0; $i < 10; $i++) {
-            $randQuote = $this->getRandomEntry($quotes);
-
-            return $this->formatQuote($randQuote, $xpath);
-        }
-
-        throw new \Exception('Was not able to find a quote on iBash');
+        return $this->formatQuote($randQuote, $xpath);
     }
 
     /**
