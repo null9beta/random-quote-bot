@@ -47,12 +47,11 @@ class IbashRandomQuote extends AbstractRandomQuote
      */
     protected function formatQuote($randQuote)
     {
-
         $line = trim($randQuote->textContent);
         $line = preg_replace('/</', "\n *<", $line);
         $line = preg_replace('/>/', '>*', $line);
+        $line = preg_replace('/(\d+?) Kommentare/', '', $line);
 
         return $line;
     }
 }
- 
