@@ -29,6 +29,27 @@ abstract class AbstractRandomQuote implements RandomQuoteInterface
      */
     public function sendQuote($channel)
     {
-        return $this->slackBot->postMessage($channel, $this->getRandomQuote());
+        return $this->slackBot->postMessage(
+            $channel,
+            $this->getRandomQuote(),
+            $this->getBotName(),
+            $this->getBotAvatarUrl()
+        );
+    }
+
+    /**
+     * @return string
+     */
+    protected function getBotName()
+    {
+        return 'random-bot';
+    }
+
+    /**
+     * @return string
+     */
+    protected function getBotAvatarUrl()
+    {
+        return '';
     }
 }

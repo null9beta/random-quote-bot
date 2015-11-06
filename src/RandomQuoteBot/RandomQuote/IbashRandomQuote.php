@@ -3,12 +3,27 @@
 namespace RandomQuoteBot\RandomQuote;
 
 use DOMDocument;
-use DOMNode;
 use DOMNodeList;
 use RandomQuoteBot\AbstractRandomQuote;
 
 class IbashRandomQuote extends AbstractRandomQuote
 {
+    /**
+     * @return string
+     */
+    protected function getBotName()
+    {
+        return 'iBash';
+    }
+
+    /**
+     * @return string
+     */
+    protected function getBotAvatarUrl()
+    {
+        return 'http://a4.mzstatic.com/eu/r30/Purple3/v4/30/ed/fc/30edfc08-63b2-6060-92ae-b684edf3c03c/icon175x175.jpeg';
+    }
+
     /**
      * @throws \Exception
      * @return string
@@ -25,7 +40,7 @@ class IbashRandomQuote extends AbstractRandomQuote
         $quotes = $xpath->query('//td[@class="quote"]');
         $randQuote = $this->getRandomEntry($quotes);
 
-        return $this->formatQuote($randQuote, $xpath);
+        return $this->formatQuote($randQuote);
     }
 
     /**
