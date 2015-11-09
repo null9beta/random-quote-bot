@@ -9,6 +9,14 @@ use RandomQuoteBot\AbstractRandomQuote;
 class GermanBashRandomQuote extends AbstractRandomQuote
 {
     /**
+     * @var array
+     */
+    protected static $invalidContents = [
+        'GA_googleFillSlot("gbo_quotes_728x90_1");',
+        'GA_googleFillSlot("gbo_quotes_728x90_2");',
+    ];
+
+    /**
      * @return string
      */
     protected function getBotName()
@@ -47,7 +55,12 @@ class GermanBashRandomQuote extends AbstractRandomQuote
                 continue;
             }
 
-            return $this->formatQuote($randQuote);
+            $quoteString = $this->formatQuote($randQuote);
+            if (in_array($quoteString, self::$invalidContents)) {
+                continue;
+            }
+
+            return $quoteString;
         }
 
         throw new \Exception('Was not able to find a quote on german bash');
