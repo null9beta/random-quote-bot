@@ -9,6 +9,22 @@ use RandomQuoteBot\AbstractRandomQuote;
 class GermanBashRandomQuote extends AbstractRandomQuote
 {
     /**
+     * @return string
+     */
+    protected function getBotName()
+    {
+        return 'German Bash';
+    }
+
+    /**
+     * @return string
+     */
+    protected function getBotAvatarUrl()
+    {
+        return 'http://german-bash.org/apple-touch-icon.png';
+    }
+
+    /**
      * @throws \Exception
      * @return string
      */
@@ -38,11 +54,11 @@ class GermanBashRandomQuote extends AbstractRandomQuote
     }
 
     /**
-     * @param $quotes
+     * @param \DOMNodeList $quotes
      *
-     * @return mixed
+     * @return DOMNode
      */
-    protected function getRandomEntry($quotes)
+    protected function getRandomEntry(\DOMNodeList $quotes)
     {
         $quoteNumber = mt_rand(0, $quotes->length);
         $randQuote = $quotes->item($quoteNumber);
@@ -50,11 +66,11 @@ class GermanBashRandomQuote extends AbstractRandomQuote
     }
 
     /**
-     * @param $randQuote
+     * @param DOMNode $randQuote
      *
      * @return string
      */
-    protected function formatQuote($randQuote)
+    protected function formatQuote(DOMNode $randQuote)
     {
         $lines = [];
 
@@ -75,4 +91,3 @@ class GermanBashRandomQuote extends AbstractRandomQuote
         return join(" \n", $lines);
     }
 }
- 
